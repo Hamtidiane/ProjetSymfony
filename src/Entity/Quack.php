@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\QuackRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: QuackRepository::class)]
@@ -18,6 +20,12 @@ class Quack
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
+
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'quacks')]
+    private Collection $Tags;
 
     public function getId(): ?int
     {
@@ -50,5 +58,30 @@ class Quack
 		
 		public function __construct(){
 			$this->created_at = new \DateTimeImmutable();
+            $this->Tags = new ArrayCollection();
 		}
+
+        /**
+         * @return Collection<int, Tag>
+         */
+        public function getTags(): Collection
+        {
+            return $this->Tags;
+        }
+
+        public function addTag(Tag $tag): static
+        {
+            if (!$this->Tags->contains($tag)) {
+                $this->Tags->add($tag);
+            }
+
+            return $this;
+        }
+
+        public function removeTag(Tag $tag): static
+        {
+            $this->Tags->removeElement($tag);
+
+            return $this;
+        }
 }
