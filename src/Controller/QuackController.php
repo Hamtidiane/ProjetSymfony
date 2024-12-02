@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/quack')]
+#[Route('/quacks')]
 final class QuackController extends AbstractController
 {
     #[Route(name: 'app_quack_index', methods: ['GET'])]

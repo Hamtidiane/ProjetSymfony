@@ -3,9 +3,12 @@
 {% block title %}New Ducks{% endblock %}
 
 {% block body %}
+    <div id="test">
+
     <h1>Create new Ducks</h1>
 
     {{ include('ducks/_form.html.twig') }}
 
     <a href="{{ path('app_ducks_index') }}">back to list</a>
+    </div>
 {% endblock %}

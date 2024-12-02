@@ -5,63 +5,32 @@
 }
 
 body {
-    background-color: skyblue;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-
+    background-color: #f8f9fa; /* Couleur de fond claire */
 }
 
-.wrapper {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    text-align: center;
+h1 {
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: #343a40;
 }
 
-.form-wrapper > div{
-    width: 500px;
-    margin: auto;
+.table th, .table td {
+    vertical-align: middle;
 }
 
-.form-wrapper input{
-    width: 260px;
-    padding: 5px;
-    margin: 5px 0;
-    background: none;
-    border: none;
-    border-bottom: 2px solid black;
-    border-radius: 0 0 10px 10px;
-}
-.form-wrapper form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid black;
-    border-radius: 30px 5px 30px 5px;
-    padding: 30px 10px;
-    box-shadow: inset 0 0 10px black;
+.table tbody tr:hover {
+    background-color: #f1f1f1;
 }
 
-.form-wrapper form div{
-    width: 400px;
-    display: flex;
-    justify-content: space-between;
+.btn {
+    margin-right: 5px;
+    background-color: black;
+}
+.card {
+    border-radius: 10px;
+    padding: 20px;
 }
 
-.form-wrapper form > div:nth-child(6){
-    display: flex;
-    width: 80%;
-}
-
-.form-wrapper form > div:nth-child(6) input[type="checkbox"]{
-    margin-right: 60%;
-    width: auto;
-}
-
-.form-wrapper button{
-    padding: 10px 30px;
+input, textarea, select {
+    border-radius: 5px;
 }

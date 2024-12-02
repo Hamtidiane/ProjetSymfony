@@ -3,28 +3,40 @@
 {% block title %}Quack{% endblock %}
 
 {% block body %}
-    <h1>Quack</h1>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Quack Details</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ quack.id }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ quack.content }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th scope="row" class="bg-light">Id</th>
+                        <td>{{ quack.id }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Content</th>
+                        <td>{{ quack.content }}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" class="bg-light">Created At</th>
+                        <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
-    <a href="{{ path('app_quack_index') }}">back to list</a>
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{{ path('app_quack_index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to List
+            </a>
 
-    <a href="{{ path('app_quack_edit', {'id': quack.id}) }}">edit</a>
+            <a href="{{ path('app_quack_edit', {'id': quack.id}) }}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Edit
+            </a>
 
-    {{ include('quack/_delete_form.html.twig') }}
+            {{ include('quack/_delete_form.html.twig', {'class': 'd-inline'}) }}
+        </div>
+    </div>
 {% endblock %}

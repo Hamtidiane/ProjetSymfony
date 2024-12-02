@@ -1,37 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Quack index{% endblock %}
+{% block title %}Quack Index{% endblock %}
 
 {% block body %}
-    <h1>Quack index</h1>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Quack Index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Content</th>
-                <th>Created_at</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for quack in quacks %}
-            <tr>
-                <td>{{ quack.id }}</td>
-                <td>{{ quack.content }}</td>
-                <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_quack_show', {'id': quack.id}) }}">show</a>
-                    <a href="{{ path('app_quack_edit', {'id': quack.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{{ path('app_quack_new') }}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Create New
+            </a>
+        </div>
 
-    <a href="{{ path('app_quack_new') }}">Create new</a>
+        <table class="table table-hover table-bordered shadow-sm">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Content</th>
+                <th scope="col">Created At</th>
+                <th scope="col" class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for quack in quacks %}
+                <tr>
+                    <td>{{ quack.id }}</td>
+                    <td>{{ quack.content }}</td>
+                    <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td class="text-center">
+                        <a href="{{ path('app_quack_show', {'id': quack.id}) }}" class="btn btn-info btn-sm">
+                            <i class="fas fa-eye"></i> Show
+                        </a>
+                        <a href="{{ path('app_quack_edit', {'id': quack.id}) }}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
