@@ -1,42 +1,63 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Quack{% endblock %}
+{% block title %}Quack Details{% endblock %}
 
 {% block body %}
     <div class="container my-5">
-        <h1 class="text-center mb-4">Quack Details</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-header d-flex align-items-center bg-white">
+                        <!-- Photo de profil -->
+                        <img src="{{ asset('uploads/' ~ quack.picture) }}" alt="Picture" class="rounded-circle me-3" width="50" height="50">
 
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <table class="table table-bordered">
-                    <tbody>
-                    <tr>
-                        <th scope="row" class="bg-light">Id</th>
-                        <td>{{ quack.id }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="bg-light">Content</th>
-                        <td>{{ quack.content }}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="bg-light">Created At</th>
-                        <td>{{ quack.createdAt ? quack.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                        <!-- Nom et date de publication -->
+                        <div>
+                            <h5 class="m-0">
+                                {% if app.user %}
+                                    {{ app.user.duckname }}
+                                {% else %}
+                                    Anonymous
+                                {% endif %}
+                            </h5>
+                            <small class="text-muted">Published on {{ quack.createdAt ? quack.createdAt|date('d M Y, H:i') : '' }}</small>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Message du Quack -->
+                        <p class="fs-5">{{ quack.content }}</p>
+
+                        <!-- Tags -->
+                        <div class="mb-3">
+                            <h6>Tags:</h6>
+                            {% if quack.tags|length > 0 %}
+                                <div class="d-flex flex-wrap">
+                                    {% for tag in quack.tags %}
+                                        <span class="badge bg-primary me-2 mb-2">{{ tag.name }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p class="text-muted">No tags available.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="card-footer bg-white d-flex justify-content-between">
+                        <a href="{{ path('app_quack_index') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+
+                        <div>
+                            <a href="{{ path('app_quack_edit', {'id': quack.id}) }}" class="btn btn-warning me-2">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            {{ include('quack/_delete_form.html.twig', {'class': 'd-inline'}) }}
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="d-flex justify-content-between mt-4">
-            <a href="{{ path('app_quack_index') }}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left"></i> Back to List
-            </a>
-
-            <a href="{{ path('app_quack_edit', {'id': quack.id}) }}" class="btn btn-warning">
-                <i class="fas fa-edit"></i> Edit
-            </a>
-
-            {{ include('quack/_delete_form.html.twig', {'class': 'd-inline'}) }}
         </div>
     </div>
 {% endblock %}

@@ -16,7 +16,7 @@ class QuackType extends AbstractType
         $builder
             ->add('content')
 	    ->add('picture', FileType::class,[
-	    'label' => false,
+	    'label' => 'Image (JPEG, PNG, GIF)',
 	    'required' => false,
 	    'mapped' => false,
 	    'constraints' => [

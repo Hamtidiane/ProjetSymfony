@@ -17,6 +17,20 @@ class Quack
 
     #[ORM\Column(length: 255)]
     private ?string $content = null;
+	
+		#[ORM\Column( nullable:true)]
+		private ?string $picture = null;
+	
+	#[ORM\ManyToOne(inversedBy: 'quacks')]
+	private ?Ducks $author = null;
+	
+	#[ORM\ManyToOne(inversedBy: 'children')]
+	#[ORM\JoinColumn(nullable: true)]
+	private ?Quack $parent = null;
+	
+	#[ORM\OneToMany(targetEntity: Quack::class, mappedBy: 'parent')]
+	private Collection $children;
+	
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -84,4 +98,42 @@ class Quack
 
             return $this;
         }
+				
+				public function getParent(): ?Quack{
+					return $this->parent;
+				}
+				public function setParent(?Quack $parent): static{
+					return $this->parent = $parent;
+				}
+				public function getChildren(): Collection{
+					return $this->children;
+				}
+	
+	/**
+	 * @param Collection $children
+	 */
+				public function setChildren(Collection $children): void
+				{
+					$this->children = $children;
+				}
+				public function getAuthor(): ?Ducks{
+					return $this->author;
+				}
+				public function setAuthor(?Ducks $author): void{
+				 $this->author = $author;
+				}
+				public function getPicture(): ?string{
+					return $this->picture;
+				}
+				public function setPicture(?string $picture): self
+				{
+				 	$this->picture = $picture;
+					return $this;
+				}
+				public function addChild(Quack $child): static{
+					if (!$this->children->contains($child)) {
+						$this->children->add($child);
+					}
+					return $this;
+				}
 }

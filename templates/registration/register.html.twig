@@ -1,34 +1,79 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Create New Duck{% endblock %}
 
 {% block body %}
-<div class="wrapper">
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+    <div class="container py-5 d-flex justify-content-center">
+        <div class="col-md-8">
+            <!-- Carte principale -->
+            <div class="card shadow-lg border-0">
+                <div class="card-body p-5">
+                    <!-- Titre du formulaire -->
+                    <h2 class="text-center fw-bold mb-4" style="color: #1877F2;">Create Your Duck Account</h2>
 
-    <h1>Register</h1>
+                    <!-- Formulaire de création -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="firstname" class="form-label fw-bold">First Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
+                                <input type="text" id="firstname" class="form-control" placeholder="Enter your first name" required>
+                            </div>
+                        </div>
 
-    <div class="form-wrapper">
-        <div>
+                        <div class="mb-3">
+                            <label for="lastname" class="form-label fw-bold">Last Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-user"></i></span>
+                                <input type="text" id="lastname" class="form-control" placeholder="Enter your last name" required>
+                            </div>
+                        </div>
 
+                        <div class="mb-3">
+                            <label for="duckname" class="form-label fw-bold">Duck Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-feather"></i></span>
+                                <input type="text" id="duckname" class="form-control" placeholder="Choose your duck name" required>
+                            </div>
+                        </div>
 
-    {{ form_errors(registrationForm) }}
+                        <div class="mb-3">
+                            <label for="email" class="form-label fw-bold">Email Address</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-envelope"></i></span>
+                                <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                            </div>
+                        </div>
 
-        {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.duckname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                        <div class="mb-3">
+                            <label for="password" class="form-label fw-bold">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-lock"></i></span>
+                                <input type="password" id="password" class="form-control" placeholder="Create a password" required>
+                            </div>
+                        </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">
+                                I agree to the <a href="#" class="text-primary">Terms and Conditions</a>
+                            </label>
+                        </div>
+
+                        <!-- Bouton d'inscription -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill">Create Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bouton retour -->
+            <div class="text-center mt-4">
+                <a href="{{ path('app_ducks_index') }}" class="btn btn-link text-primary">
+                    <i class="fas fa-arrow-left"></i> Back to List
+                </a>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

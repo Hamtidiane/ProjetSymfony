@@ -1,4 +1,26 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Duck{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                {{ form_start(form, {'attr': {'class': 'row g-3'}}) }}
+
+                {{ form_widget(form, {
+                    'attr': {'class': 'form-control'},
+                    'row_attr': {'class': 'col-md-6'}
+                }) }}
+
+                <div class="text-center mt-4">
+                    <button class="btn btn-success w-100">{{ button_label|default('Save') }}</button>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
