@@ -5,6 +5,7 @@
 	use App\Entity\Ducks;
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+	use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 	use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 	use Symfony\Component\Form\Extension\Core\Type\TextType;
 	use Symfony\Component\Form\Extension\Core\Type\EmailType; // Importer EmailType
@@ -68,6 +69,14 @@
 							'max' => 4096,
 						]),
 					],
+				])
+				->add('role', ChoiceType::class, [
+					'mapped' => false, // Indique que ce champ n'est pas directement lié à l'entité
+					'choices' => [
+						'User' => 'ROLE_USER',
+						'Admin' => 'ROLE_ADMIN',
+					],
+					'label' => 'Select your role',
 				])
 			;
 		}

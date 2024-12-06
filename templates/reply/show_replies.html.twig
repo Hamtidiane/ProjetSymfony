@@ -1,0 +1,138 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réponses au Quack{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Quack principal -->
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-primary text-white d-flex align-items-center">
+                        <img
+                                src="{{ asset('uploads/' ~ quack.picture) }}"
+                                alt="Photo de l'auteur"
+                                class="rounded-circle me-3"
+                                width="50"
+                                height="50"
+                        >
+                        <div>
+                            <h5 class="m-0 fw-bold">{{ quack.author.duckname }}</h5>
+                            <small class="text-light">Publié le {{ quack.createdAt|date('d M Y, H:i') }}</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="fs-5 mb-0">{{ quack.content }}</p>
+                    </div>
+                </div>
+
+                <!-- Section des réponses -->
+                <div class="card shadow">
+                    <div class="card-header bg-light">
+                        <h5 class="m-0">Réponses ({{ replies|length }})</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if replies|length > 0 %}
+                            <ul class="list-group list-group-flush">
+                                {% for reply in replies %}
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-start">
+                                            <img
+                                                    src="{{ asset('uploads/' ~ reply.author.picture) }}"
+                                                    alt="Photo de l'auteur"
+                                                    class="rounded-circle me-3"
+                                                    width="40"
+                                                    height="40"
+                                            >
+                                            <div>
+                                                <strong class="text-dark">{{ reply.author.duckname }}</strong>
+                                                <p class="mb-1">{{ reply.content }}</p>
+                                                <small class="text-muted">Publié le {{ reply.createdAt|date('d M Y, H:i') }}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="text-muted text-center mb-0">Aucune réponse pour ce Quack.</p>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer text-end bg-light">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-reply me-1"></i> Ajouter une réponse
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Réponses au Quack{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Quack principal -->
+                <div class="card shadow mb-4">
+                    <div class="card-header bg-primary text-white d-flex align-items-center">
+                        <img
+                                src="{{ asset('uploads/' ~ quack.picture) }}"
+                                alt="Photo de l'auteur"
+                                class="rounded-circle me-3"
+                                width="50"
+                                height="50"
+                        >
+                        <div>
+                            <h5 class="m-0 fw-bold">{{ quack.author.duckname }}</h5>
+                            <small class="text-light">Publié le {{ quack.createdAt|date('d M Y, H:i') }}</small>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="fs-5 mb-0">{{ quack.content }}</p>
+                    </div>
+                </div>
+
+                <!-- Section des réponses -->
+                <div class="card shadow">
+                    <div class="card-header bg-light">
+                        <h5 class="m-0">Réponses ({{ replies|length }})</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if replies|length > 0 %}
+                            <ul class="list-group list-group-flush">
+                                {% for reply in replies %}
+                                    <li class="list-group-item">
+                                        <div class="d-flex align-items-start">
+                                            <img
+                                                    src="{{ asset('uploads/' ~ reply.author.picture) }}"
+                                                    alt="Photo de l'auteur"
+                                                    class="rounded-circle me-3"
+                                                    width="40"
+                                                    height="40"
+                                            >
+                                            <div>
+                                                <strong class="text-dark">{{ reply.author.duckname }}</strong>
+                                                <p class="mb-1">{{ reply.content }}</p>
+                                                <small class="text-muted">Publié le {{ reply.createdAt|date('d M Y, H:i') }}</small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p class="text-muted text-center mb-0">Aucune réponse pour ce Quack.</p>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer text-end bg-light">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-reply me-1"></i> Ajouter une réponse
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

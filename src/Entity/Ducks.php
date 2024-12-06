@@ -7,6 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 
 #[ORM\Entity(repositoryClass: DucksRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -44,6 +47,8 @@ class Ducks implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
+		#[ORM\Column(type: 'string', length: 255, nullable: true)]
+		private ?string $picture = null;
 
     public function getId(): ?int
     {
@@ -61,6 +66,19 @@ class Ducks implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+	
+
+	
+	public function getPicture(): ?string
+	{
+		return $this->picture;
+	}
+	
+	public function setPicture(?string $picture): self
+	{
+		$this->picture = $picture;
+		return $this;
+	}
 
     /**
      * A visual identifier that represents this user.
@@ -167,4 +185,41 @@ class Ducks implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="App\Entity\Reply", mappedBy="duck")
+	 */
+	private Collection $replies;
+	
+	public function __construct()
+	{
+		$this->replies = new ArrayCollection();
+	}
+	
+	public function getReplies(): Collection
+	{
+		return $this->replies;
+	}
+	
+	public function addReply(Reply $reply): static
+	{
+		if (!$this->replies->contains($reply)) {
+			$this->replies[] = $reply;
+			$reply->setAuthor($this);  // Lier chaque réponse au Duck
+		}
+		
+		return $this;
+	}
+	
+	public function removeReply(Reply $reply): static
+	{
+		if ($this->replies->removeElement($reply)) {
+			// Si la réponse est retirée, vous pouvez aussi dissocier le Duck
+			if ($reply->getAuthor() === $this) {
+				$reply->setAuthor(null);
+			}
+		}
+		
+		return $this;
+	}
 }

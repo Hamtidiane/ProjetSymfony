@@ -1,0 +1,21 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Répondre au Quack{% endblock %}
+
+{% block body %}
+    <div class="container my-5">
+        <h1>Répondre au Quack</h1>
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h5>{{ quack.content }}</h5>
+                <p>Posté par: {{ quack.author.duckname }}</p>
+                <hr>
+                {{ form_start(form) }}
+                {{ form_row(form.content) }}
+                <button class="btn btn-primary">Répondre</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -52,6 +52,17 @@
                                 <input type="password" id="password" class="form-control" placeholder="Create a password" required>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label for="role" class="form-label fw-bold">Role</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="fas fa-user-shield"></i></span>
+                                <select id="role" name="role" class="form-select" required>
+                                    <option value="ROLE_USER">User</option>
+                                    <option value="ROLE_ADMIN">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+
 
                         <div class="form-check mb-4">
                             <input class="form-check-input" type="checkbox" id="agreeTerms" required>
@@ -59,6 +70,7 @@
                                 I agree to the <a href="#" class="text-primary">Terms and Conditions</a>
                             </label>
                         </div>
+
 
                         <!-- Bouton d'inscription -->
                         <div class="d-grid">
